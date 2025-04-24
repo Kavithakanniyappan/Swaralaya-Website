@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swaralaya Music and Dance Academy</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fdf6f0; color: #333; }
+    header { background: #8e44ad; color: white; padding: 20px; text-align: center; }
+    header img { height: 80px; margin-bottom: 10px; }
+    nav { background: #d1b2f0; padding: 10px; text-align: center; }
+    nav a { margin: 0 15px; color: #4a235a; text-decoration: none; font-weight: bold; }
+    section { padding: 30px; }
+    .form-container { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #8e44ad; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    footer { background: #4a235a; color: white; text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Upload your logo image to GitHub and replace the path below -->
+    <img src="logo.jpg" alt="Academy Logo">
+    <h1>Swaralaya Music and Dance Academy</h1>
+    <p>Sharaf Bazar, Arani | Contact: 9524024097 | Email: banumani2012@gmail.com</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#classes">Classes</a>
+    <a href="#events">Events</a>
+    <a href="#register">Register</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Swaralaya Music and Dance Academy, led by Banu Manikandan, offers classical music and dance training in a culturally rich and nurturing environment. Classes are held on weekends, and students regularly participate in prestigious events and exams.</p>
+  </section>
+
+  <section id="classes">
+    <h2>Classes Offered</h2>
+    <ul>
+      <li>Vocal: Saturday 5–6:30 PM, Sunday 10–12 AM</li>
+      <li>Violin: Friday & Sunday</li>
+      <li>Keyboard:
+        <ul>
+          <li>Juniors: Saturday 5–6:15 PM</li>
+          <li>Seniors: Saturday 6–7:15 PM</li>
+        </ul>
+      </li>
+      <li>Veena: Saturday 6–8 PM, Sunday 10–12 AM</li>
+      <li>Classical Dance: Contact us for timings</li>
+    </ul>
+  </section>
+
+  <section id="events">
+    <h2>Events</h2>
+    <p>Our students participate in Annual Day Celebrations, Margazhi Mahotsavam, Shivratri Functions, and yearly Bridge Academy exams, where they excel and win prizes.</p>
+  </section>
+
+  <section id="register">
+    <h2>Student Registration Form</h2>
+    <div class="form-container">
+      <form>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="class">Select Class</label>
+        <select id="class" name="class">
+          <option value="vocal">Vocal</option>
+          <option value="violin">Violin</option>
+          <option value="keyboard">Keyboard</option>
+          <option value="veena">Veena</option>
+          <option value="dance">Classical Dance</option>
+        </select>
+
+        <label for="phone">Contact Number</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="message">Additional Message</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Address: Sharaf Bazar, Arani, Thiruvannamalai District<br>
+       Phone: 9524024097<br>
+       Email: banumani2012@gmail.com</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Swarayala Music and Dance Academy. All rights reserved.</p>
+  </footer>
+</body>
+</html>
