@@ -1,110 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Swaralaya Music and Dance Academy</title>
-  <style>
-    .circular-logo {
-      width: 150px;              /* Medium size */
-      height: 150px;
-      border-radius: 50%;        /* Makes it circular */
-      object-fit: cover;         /* Keeps image inside without distortion */
-      border: 2px solid #333; 
-}
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fdf6f0; color: #333; }
-    header { background: #8e44ad; color: white; padding: 20px; text-align: center; }
-    header img { height: 80px; margin-bottom: 10px; }
-    nav { background: #d1b2f0; padding: 10px; text-align: center; }
-    nav a { margin: 0 15px; color: #4a235a; text-decoration: none; font-weight: bold; }
-    section { padding: 30px; }
-    .form-container { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-    button { background: #8e44ad; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    footer { background: #4a235a; color: white; text-align: center; padding: 20px; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Swaralaya Music & Dance Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dark: #8b6914;
+    --deep: #1a1208;
+    --deep2: #241a0a;
+    --cream: #fdf6e3;
+    --cream2: #f5e9c8;
+    --text: #2c1f08;
+    --text-muted: #6b5230;
+    --border: rgba(201,168,76,0.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--deep);color:var(--cream);font-family:'EB Garamond',serif;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(26,18,8,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 2rem;}
+  .nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .nav-logo{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.08em;}
+  .nav-logo span{display:block;font-size:0.65rem;color:var(--gold-light);letter-spacing:0.18em;font-family:'EB Garamond',serif;font-style:italic;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--cream2);text-decoration:none;font-size:0.9rem;letter-spacing:0.06em;font-family:'Cinzel',serif;font-size:0.78rem;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--gold);}
+  .nav-cta{background:var(--gold);color:var(--deep);font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;padding:0.45rem 1.2rem;border:none;cursor:pointer;transition:background 0.2s;}
+  .nav-cta:hover{background:var(--gold-light);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+  .hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);}
+  .mobile-menu{display:none;position:fixed;top:60px;left:0;width:100%;background:rgba(26,18,8,0.98);padding:1.5rem 2rem;z-index:99;border-bottom:1px solid var(--border);}
+  .mobile-menu.open{display:block;}
+  .mobile-menu a{display:block;color:var(--cream2);text-decoration:none;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.06em;padding:0.8rem 0;border-bottom:1px solid var(--border);}
+  .mobile-menu a:hover{color:var(--gold);}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:80px 2rem 4rem;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%, #3a2808 0%, #1a1208 60%, #0d0905 100%);}
+  .hero-pattern{position:absolute;inset:0;opacity:0.07;background-image:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+  .hero-ornament{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;border:1px solid rgba(201,168,76,0.08);pointer-events:none;}
+  .hero-ornament:before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(201,168,76,0.06);}
+  .hero-content{position:relative;z-index:2;max-width:800px;}
+  .hero-tag{font-family:'EB Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--gold-light);letter-spacing:0.12em;margin-bottom:1.2rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+  .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.2rem,6vw,4.2rem);font-weight:700;line-height:1.1;color:var(--cream);margin-bottom:0.5rem;opacity:0;animation:fadeUp 0.8s 0.4s forwards;}
+  .hero-title .gold{color:var(--gold);}
+  .hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--cream2);font-weight:300;letter-spacing:0.15em;margin-bottom:0.5rem;opacity:0;animation:fadeUp 0.8s 0.6s forwards;}
+  .hero-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.5rem auto;opacity:0;animation:fadeUp 0.8s 0.7s forwards;}
+  .hero-desc{font-size:1.1rem;color:rgba(253,246,227,0.7);max-width:560px;margin:0 auto 2.2rem;line-height:1.8;opacity:0;animation:fadeUp 0.8s 0.9s forwards;}
+  .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 1.1s forwards;}
+  .btn-primary{background:var(--gold);color:var(--deep);font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.1em;padding:0.85rem 2.2rem;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
+  .btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold);font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.1em;padding:0.85rem 2.2rem;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .btn-outline:hover{background:rgba(201,168,76,0.1);}
+  .hero-info{display:flex;gap:2.5rem;justify-content:center;margin-top:3rem;opacity:0;animation:fadeUp 0.8s 1.3s forwards;flex-wrap:wrap;}
+  .hero-info-item{text-align:center;}
+  .hero-info-item .num{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);font-weight:600;}
+  .hero-info-item .lbl{font-size:0.8rem;color:var(--text-muted);letter-spacing:0.1em;font-family:'EB Garamond',serif;font-style:italic;}
+
+  /* SECTIONS */
+  section{padding:5rem 2rem;}
+  .section-inner{max-width:1100px;margin:auto;}
+  .section-tag{font-family:'EB Garamond',serif;font-style:italic;color:var(--gold);font-size:1rem;letter-spacing:0.12em;text-align:center;margin-bottom:0.5rem;}
+  .section-title{font-family:'Cinzel',serif;font-size:clamp(1.5rem,3vw,2.2rem);text-align:center;color:var(--cream);margin-bottom:0.5rem;letter-spacing:0.05em;}
+  .section-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1rem auto 3rem;}
+
+  /* ABOUT */
+  .about{background:var(--deep2);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .about-text p{font-size:1.1rem;line-height:1.9;color:rgba(253,246,227,0.82);margin-bottom:1.2rem;}
+  .about-text .highlight{color:var(--gold-light);font-style:italic;}
+  .about-features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+  .about-feature{background:rgba(201,168,76,0.06);border:1px solid var(--border);padding:1rem 1.2rem;}
+  .about-feature .icon{font-size:1.4rem;margin-bottom:0.4rem;}
+  .about-feature h4{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:0.3rem;}
+  .about-feature p{font-size:0.88rem;color:rgba(253,246,227,0.65);line-height:1.6;}
+  .about-visual{display:flex;flex-direction:column;gap:1rem;}
+  .about-card{background:rgba(201,168,76,0.05);border:1px solid var(--border);padding:1.8rem;text-align:center;}
+  .about-card .big{font-family:'Cinzel',serif;font-size:2.5rem;color:var(--gold);font-weight:700;}
+  .about-card p{font-size:0.9rem;color:rgba(253,246,227,0.6);font-style:italic;margin-top:0.3rem;}
+
+  /* COURSES */
+  .courses{background:var(--deep);}
+  .courses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;}
+  .course-card{background:rgba(201,168,76,0.04);border:1px solid var(--border);padding:2rem 1.5rem;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;}
+  .course-card:before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.3s;}
+  .course-card:hover{background:rgba(201,168,76,0.09);transform:translateY(-3px);}
+  .course-card:hover:before{transform:scaleX(1);}
+  .course-icon{font-size:2.2rem;margin-bottom:1rem;}
+  .course-card h3{font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:0.6rem;}
+  .course-card p{font-size:0.88rem;color:rgba(253,246,227,0.6);line-height:1.7;margin-bottom:1rem;}
+  .course-badge{display:inline-block;background:rgba(201,168,76,0.15);border:1px solid var(--gold-dark);color:var(--gold-light);font-family:'Cinzel',serif;font-size:0.7rem;padding:0.3rem 0.8rem;letter-spacing:0.06em;}
+
+  /* SCHEDULE */
+  .schedule{background:var(--deep2);}
+  .schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+  .schedule-card{background:rgba(201,168,76,0.04);border:1px solid var(--border);overflow:hidden;}
+  .schedule-head{background:rgba(201,168,76,0.12);padding:1rem 1.4rem;border-bottom:1px solid var(--border);}
+  .schedule-head h3{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);letter-spacing:0.08em;}
+  .schedule-body{padding:1.2rem 1.4rem;}
+  .schedule-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid rgba(201,168,76,0.08);}
+  .schedule-row:last-child{border-bottom:none;}
+  .schedule-day{font-family:'Cinzel',serif;font-size:0.72rem;color:var(--gold-light);letter-spacing:0.06em;}
+  .schedule-time{font-size:0.85rem;color:rgba(253,246,227,0.75);font-style:italic;}
+  .fee-banner{background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border:1px solid var(--gold);padding:2rem;text-align:center;margin-top:2.5rem;}
+  .fee-banner .fee-amount{font-family:'Cinzel',serif;font-size:2.5rem;color:var(--gold);font-weight:700;}
+  .fee-banner p{font-size:0.95rem;color:rgba(253,246,227,0.65);margin-top:0.4rem;font-style:italic;}
+
+  /* FACULTY */
+  .faculty{background:var(--deep);}
+  .faculty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+  .faculty-card{text-align:center;padding:2rem 1.5rem;background:rgba(201,168,76,0.04);border:1px solid var(--border);transition:all 0.3s;}
+  .faculty-card:hover{background:rgba(201,168,76,0.09);}
+  .faculty-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dark),var(--gold));margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.6rem;color:var(--deep);font-weight:700;border:2px solid var(--gold);}
+  .faculty-card h3{font-family:'Cinzel',serif;font-size:0.95rem;color:var(--cream);letter-spacing:0.06em;margin-bottom:0.3rem;}
+  .faculty-card .role{font-size:0.85rem;color:var(--gold);font-style:italic;margin-bottom:0.6rem;}
+  .faculty-card p{font-size:0.85rem;color:rgba(253,246,227,0.55);line-height:1.6;}
+
+  /* GALLERY placeholder */
+  .gallery{background:var(--deep2);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .gallery-item{aspect-ratio:4/3;background:rgba(201,168,76,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--gold);position:relative;overflow:hidden;transition:all 0.3s;}
+  .gallery-item:hover{background:rgba(201,168,76,0.12);}
+  .gallery-item:nth-child(1){grid-column:span 2;}
+  .gallery-item span{font-family:'EB Garamond',serif;font-style:italic;font-size:0.85rem;color:rgba(253,246,227,0.4);letter-spacing:0.1em;position:absolute;bottom:0.8rem;left:0;right:0;text-align:center;}
+
+  /* CONTACT / ENROLL */
+  .contact{background:var(--deep);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+  .contact-info h3{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.06em;margin-bottom:1.5rem;}
+  .contact-item{display:flex;gap:1rem;margin-bottom:1.4rem;align-items:flex-start;}
+  .contact-item .ci-icon{font-size:1.2rem;margin-top:0.1rem;flex-shrink:0;}
+  .contact-item .ci-label{font-family:'Cinzel',serif;font-size:0.72rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:0.2rem;}
+  .contact-item .ci-val{font-size:0.95rem;color:rgba(253,246,227,0.8);line-height:1.6;}
+  .form-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.06em;margin-bottom:1.5rem;}
+  .form-row{margin-bottom:1.1rem;}
+  .form-row label{display:block;font-family:'Cinzel',serif;font-size:0.72rem;color:var(--gold-light);letter-spacing:0.08em;margin-bottom:0.4rem;}
+  .form-row input,.form-row select,.form-row textarea{width:100%;background:rgba(201,168,76,0.05);border:1px solid var(--border);color:var(--cream);font-family:'EB Garamond',serif;font-size:1rem;padding:0.7rem 1rem;outline:none;transition:border 0.2s;}
+  .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--gold);}
+  .form-row select option{background:var(--deep2);color:var(--cream);}
+  .form-row textarea{resize:vertical;min-height:90px;}
+  .whatsapp-btn{display:flex;align-items:center;gap:0.6rem;background:#25D366;color:#fff;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.06em;padding:0.75rem 1.5rem;text-decoration:none;margin-top:1.5rem;width:fit-content;transition:background 0.2s;}
+  .whatsapp-btn:hover{background:#1ebe5a;}
+
+  /* FOOTER */
+  footer{background:#0d0905;border-top:1px solid var(--border);padding:3rem 2rem 1.5rem;}
+  .footer-inner{max-width:1100px;margin:auto;}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+  .footer-brand .name{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:0.4rem;}
+  .footer-brand p{font-size:0.9rem;color:rgba(253,246,227,0.5);line-height:1.7;font-style:italic;}
+  .footer-col h4{font-family:'Cinzel',serif;font-size:0.78rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:1rem;}
+  .footer-col a{display:block;font-size:0.88rem;color:rgba(253,246,227,0.5);text-decoration:none;margin-bottom:0.5rem;transition:color 0.2s;}
+  .footer-col a:hover{color:var(--gold);}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:1.2rem;text-align:center;font-size:0.8rem;color:rgba(253,246,227,0.3);font-style:italic;}
+
+  /* ORNAMENT lines */
+  .ornament-line{display:flex;align-items:center;gap:1rem;margin:0 auto 3rem;max-width:300px;}
+  .ornament-line span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .ornament-line span:last-child{background:linear-gradient(90deg,var(--gold),transparent);}
+  .ornament-line i{color:var(--gold);font-size:0.7rem;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .nav-links,.nav-cta{display:none;}
+    .hamburger{display:flex;}
+    .about-grid,.contact-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr;}
+    .gallery-item:nth-child(1){grid-column:span 1;}
+    .footer-top{grid-template-columns:1fr;}
+    .about-features{grid-template-columns:1fr;}
+    .hero-info{gap:1.5rem;}
+  }
+</style>
 </head>
 <body>
-  <header>
-    <!-- Upload your logo image to GitHub and replace the path below -->
-    <img src="https://i.imgur.com/6pidp8Q.jpeg" alt="Swaralaya Graphic">
-    <h1>Swaralaya Music and Dance Academy</h1>
-    <p>Sharab Bazar, Arani | Contact: 9524024097 | Email: banumani2012@gmail.com</p>
-  </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#classes">Classes</a>
-    <a href="#events">Events</a>
-    <a href="#register">Register</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Swaralaya Music and Dance Academy, led by Banu Manikandan, offers classical music and dance training in a culturally rich and nurturing environment. Classes are held on weekends, and students regularly participate in prestigious events and exams.</p>
-  </section>
-
-  <section id="classes">
-    <h2>Classes Offered</h2>
-    <ul>
-      <li>Vocal: Saturday 5–6:30 PM, Sunday 10–12 AM</li>
-      <li>Violin: Friday & Sunday</li>
-      <li>Keyboard:
-        <ul>
-          <li>Juniors: Saturday 5–6:15 PM</li>
-          <li>Seniors: Saturday 6–7:15 PM</li>
-        </ul>
-      </li>
-      <li>Veena: Saturday 6–8 PM, Sunday 10–12 AM</li>
-      <li>Classical Dance: Contact us for timings</li>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Swaralaya <span>Music & Dance Academy</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#faculty">Faculty</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-  </section>
+    <a href="#contact" class="nav-cta">Enroll Now</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#courses" onclick="closeMenu()">Courses</a>
+  <a href="#schedule" onclick="closeMenu()">Schedule</a>
+  <a href="#faculty" onclick="closeMenu()">Faculty</a>
+  <a href="#contact" onclick="closeMenu()">Contact &amp; Enroll</a>
+</div>
 
-  <section id="events">
-    <h2>Events</h2>
-    <p>Our students participate in Annual Day Celebrations, Margazhi Mahotsavam, Shivratri Functions, and yearly Bridge Academy exams, where they excel and win prizes.</p>
-  </section>
-
-  <section id="register">
-    <h2>Student Registration Form</h2>
-    <div class="form-container">
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSfhbG34ROnRGdSFbfvrEkv6dc8gPhilpIXtFnEZx_oGo41azg/formResponse" method="POST" target="_blank">
-  <label for="name">Full Name</label>
-  <input type="text" name="entry.876571808" id="name" required>
-
-  <label for="age">Age</label>
-  <input type="number" name="entry.1724641636" id="age" required>
-
-  <label for="phone">Contact Number</label>
-  <input type="tel" name="entry.1984204440" id="phone" required>
-
-  <label for="class">Select Class</label>
-  <select name="entry.1865603925" id="class">
-    <option value="Vocal">Vocal</option>
-    <option value="Violin">Violin</option>
-    <option value="Keyboard">Keyboard</option>
-    <option value="Veena">Veena</option>
-    <option value="Classical Dance">Classical Dance</option>
-  </select>
-
-  <label for="message">Additional Message</label>
-  <textarea name="entry.1586238231" id="message" rows="4"></textarea>
-
-  <button type="submit">Submit</button>
-      </form>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+    <p class="hero-tag">— Classical Arts Academy —</p>
+    <h1 class="hero-title">Swaralaya<br/><span class="gold">Music & Dance</span><br/>Academy</h1>
+    <p class="hero-subtitle">Arani · Tiruvannamalai District</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Where tradition meets devotion. Nurturing the classical arts of Carnatic music and Bharatanatyam in the heart of Tamil Nadu.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Enroll Today</a>
+      <a href="#courses" class="btn-outline">Explore Courses</a>
     </div>
-  </section>
+    <div class="hero-info">
+      <div class="hero-info-item"><div class="num">5</div><div class="lbl">Disciplines</div></div>
+      <div class="hero-info-item"><div class="num">4</div><div class="lbl">Expert Gurus</div></div>
+      <div class="hero-info-item"><div class="num">₹800</div><div class="lbl">Per Month</div></div>
+      <div class="hero-info-item"><div class="num">Weekend</div><div class="lbl">Classes</div></div>
+    </div>
+  </div>
+</section>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Address: Sharaf Bazar, Arani, Thiruvannamalai District<br>
-       Phone: 9524024097<br>
-       Email: banumani2012@gmail.com</p>
-  </section>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <p class="section-tag">Our Story</p>
+    <h2 class="section-title">About Swaralaya</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Swaralaya — meaning <span class="highlight">"the abode of musical notes"</span> — is a classical arts academy nestled in Arani, Tiruvannamalai District, dedicated to preserving and passing on the rich heritage of South Indian performing arts.</p>
+        <p>Founded by <span class="highlight">Banu Manikandan</span>, a distinguished Carnatic vocalist and veena exponent, the academy offers training in Carnatic Vocals, Bharatanatyam, Veena, and Keyboard — each taught by passionate and experienced gurus.</p>
+        <p>We believe that classical arts are not just a skill — they are a lifelong companion that shapes discipline, devotion, and cultural identity in every student.</p>
+        <div class="about-features">
+          <div class="about-feature"><div class="icon">🎼</div><h4>Classical Focus</h4><p>Rooted in authentic tradition and Guru-Shishya parampara.</p></div>
+          <div class="about-feature"><div class="icon">📅</div><h4>Weekend Batches</h4><p>Convenient Saturday &amp; Sunday classes for all age groups.</p></div>
+          <div class="about-feature"><div class="icon">👨‍👩‍👧</div><h4>All Ages Welcome</h4><p>Beginner to advanced students welcomed warmly.</p></div>
+          <div class="about-feature"><div class="icon">🏆</div><h4>Performance Ready</h4><p>Students are groomed for arangetram and competitions.</p></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-card"><div class="big">Carnatic</div><p>South Indian classical music tradition</p></div>
+        <div class="about-card"><div class="big">Bharatanatyam</div><p>The ancient classical dance of Tamil Nadu</p></div>
+        <div class="about-card" style="display:flex;gap:2rem;justify-content:center;align-items:center;flex-direction:row;">
+          <div><div class="big" style="font-size:1.8rem;">Veena</div><p>Sacred plucked instrument</p></div>
+          <div style="width:1px;height:40px;background:var(--border);"></div>
+          <div><div class="big" style="font-size:1.8rem;">Keyboard</div><p>Modern classical bridge</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2025 Swarayala Music and Dance Academy. All rights reserved.</p>
-  </footer>
+<!-- COURSES -->
+<section class="courses" id="courses">
+  <div class="section-inner">
+    <p class="section-tag">What We Teach</p>
+    <h2 class="section-title">Our Courses</h2>
+    <div class="section-divider"></div>
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-icon">🎵</div>
+        <h3>Carnatic Vocals</h3>
+        <p>Learn the fundamentals of Carnatic music — swaras, ragas, kritis, and compositions. Suitable for all ages from absolute beginners.</p>
+        <span class="course-badge">Classical · Vocal</span>
+      </div>
+      <div class="course-card">
+        <div class="course-icon">💃</div>
+        <h3>Bharatanatyam</h3>
+        <p>Master the ancient classical dance form of Tamil Nadu — adavus, mudras, expressions, and full-stage choreography for arangetram.</p>
+        <span class="course-badge">Classical · Dance</span>
+      </div>
+      <div class="course-card">
+        <div class="course-icon">🪕</div>
+        <h3>Veena</h3>
+        <p>The Saraswati Veena, the queen of instruments. Learn correct technique, gamakas, and classical compositions from scratch.</p>
+        <span class="course-badge">Classical · Instrument</span>
+      </div>
+      <div class="course-card">
+        <div class="course-icon">🎹</div>
+        <h3>Keyboard</h3>
+        <p>Classical keyboard training blending Carnatic scales with keyboard technique — a perfect gateway for aspiring musicians.</p>
+        <span class="course-badge">Classical · Keyboard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE & FEES -->
+<section class="schedule" id="schedule">
+  <div class="section-inner">
+    <p class="section-tag">Timetable & Fees</p>
+    <h2 class="section-title">Class Schedule</h2>
+    <div class="section-divider"></div>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <div class="schedule-head"><h3>🎵 Carnatic Vocals</h3></div>
+        <div class="schedule-body">
+          <div class="schedule-row"><span class="schedule-day">Saturday</span><span class="schedule-time">5:00 PM – 6:30 PM</span></div>
+          <div class="schedule-row"><span class="schedule-day">Sunday</span><span class="schedule-time">10:00 AM – 12:00 PM</span></div>
+        </div>
+      </div>
+      <div class="schedule-card">
+        <div class="schedule-head"><h3>💃 Bharatanatyam</h3></div>
+        <div class="schedule-body">
+          <div class="schedule-row"><span class="schedule-day">Saturday</span><span class="schedule-time">6:00 PM – 7:30 PM</span></div>
+          <div class="schedule-row"><span class="schedule-day">Sunday</span><span class="schedule-time">10:00 AM – 12:00 PM</span></div>
+        </div>
+      </div>
+      <div class="schedule-card">
+        <div class="schedule-head"><h3>🪕 Veena</h3></div>
+        <div class="schedule-body">
+          <div class="schedule-row"><span class="schedule-day">Saturday</span><span class="schedule-time">6:30 PM – 8:00 PM</span></div>
+          <div class="schedule-row"><span class="schedule-day">Sunday</span><span class="schedule-time">3:00 PM – 5:00 PM</span></div>
+        </div>
+      </div>
+      <div class="schedule-card">
+        <div class="schedule-head"><h3>🎹 Keyboard</h3></div>
+        <div class="schedule-body">
+          <div class="schedule-row"><span class="schedule-day">Saturday</span><span class="schedule-time">5:00 PM – 6:30 PM</span></div>
+          <div class="schedule-row"><span class="schedule-day">Sunday</span><span class="schedule-time">3:00 PM – 5:00 PM</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="fee-banner">
+      <div class="fee-amount">₹800 / month</div>
+      <p>Uniform fees for all courses &nbsp;·&nbsp; Weekend batches only &nbsp;·&nbsp; All ages welcome</p>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section class="faculty" id="faculty">
+  <div class="section-inner">
+    <p class="section-tag">Meet the Gurus</p>
+    <h2 class="section-title">Our Faculty</h2>
+    <div class="section-divider"></div>
+    <div class="faculty-grid">
+      <div class="faculty-card">
+        <div class="faculty-avatar">BM</div>
+        <h3>Banu Manikandan</h3>
+        <div class="role">Founder & Director</div>
+        <p>A gifted Carnatic vocalist and veena exponent, Banu Manikandan brings years of performance and teaching experience. She leads the vocal and veena programmes at Swaralaya with deep dedication to the classical tradition.</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">K</div>
+        <h3>Keerthana</h3>
+        <div class="role">Bharatanatyam Instructor</div>
+        <p>Trained in the classical Bharatanatyam tradition, Keerthana imparts the nuances of adavus, abhinaya, and stage presentation with patience and artistry. She has guided numerous students through their arangetrams.</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">D</div>
+        <h3>Dhatchayani</h3>
+        <div class="role">Bharatanatyam Instructor</div>
+        <p>Dhatchayani brings a graceful blend of technical precision and expressive storytelling to her Bharatanatyam classes. She works closely with students at every level, from basic footwork to full compositions.</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">Mo</div>
+        <h3>Mosses</h3>
+        <div class="role">Keyboard Instructor</div>
+        <p>Mosses blends classical Carnatic theory with keyboard technique, helping students develop both musical understanding and practical playing skills on the keyboard.</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">NK</div>
+        <h3>Nandha Kumar</h3>
+        <div class="role">Keyboard Instructor</div>
+        <p>Nandha Kumar guides keyboard students through scales, compositions, and classical exercises, making the learning process engaging and thorough for students of all levels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-inner">
+    <p class="section-tag">Moments & Memories</p>
+    <h2 class="section-title">Gallery</h2>
+    <div class="section-divider"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item">🎭<span>Annual Performance</span></div>
+      <div class="gallery-item">💃<span>Bharatanatyam Recital</span></div>
+      <div class="gallery-item">🎵<span>Vocal Concert</span></div>
+      <div class="gallery-item">🪕<span>Veena Recital</span></div>
+      <div class="gallery-item">🎹<span>Keyboard Performance</span></div>
+    </div>
+    <p style="text-align:center;margin-top:1.5rem;font-size:0.88rem;color:rgba(253,246,227,0.4);font-style:italic;">Add your performance photos and videos here to inspire future students.</p>
+  </div>
+</section>
+
+<!-- CONTACT / ENROLL -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <p class="section-tag">Join Us</p>
+    <h2 class="section-title">Contact & Enroll</h2>
+    <div class="section-divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-label">Location</div><div class="ci-val">Arani, Tiruvannamalai District,<br/>Tamil Nadu</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div><div class="ci-label">Phone</div><div class="ci-val"><a href="tel:9524024097" style="color:inherit;text-decoration:none;">95240 24097</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">🕐</div>
+          <div><div class="ci-label">Class Days</div><div class="ci-val">Saturday & Sunday only</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">💰</div>
+          <div><div class="ci-label">Monthly Fees</div><div class="ci-val">₹800 per course</div></div>
+        </div>
+        <a href="https://wa.me/919524024097?text=Hello%2C%20I%20am%20interested%20in%20joining%20Swaralaya%20Academy." class="whatsapp-btn" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.124.554 4.122 1.522 5.857L.067 23.36a.5.5 0 0 0 .614.614l5.503-1.455A11.937 11.937 0 0 0 12 24c6.626 0 12-5.373 12-12S18.626 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.012-1.374l-.36-.215-3.732.988.987-3.733-.215-.36A9.817 9.817 0 0 1 2.182 12C2.182 6.57 6.571 2.182 12 2.182S21.818 6.57 21.818 12 17.429 21.818 12 21.818z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+      <div>
+        <p class="form-title">Enquiry / Enrollment Form</p>
+        <div class="form-row">
+          <label>Student Name</label>
+          <input type="text" placeholder="Full name"/>
+        </div>
+        <div class="form-row">
+          <label>Age</label>
+          <input type="number" placeholder="Age of student"/>
+        </div>
+        <div class="form-row">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="Parent / student contact number"/>
+        </div>
+        <div class="form-row">
+          <label>Course Interested In</label>
+          <select>
+            <option value="">Select a course</option>
+            <option>Carnatic Vocals</option>
+            <option>Bharatanatyam</option>
+            <option>Veena</option>
+            <option>Keyboard</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Message (Optional)</label>
+          <textarea placeholder="Any questions or special requirements..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitEnquiry()">Submit Enquiry</button>
+        <p id="form-msg" style="margin-top:0.8rem;font-size:0.88rem;color:var(--gold);font-style:italic;display:none;">Thank you! We will contact you shortly. 🙏</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="name">Swaralaya Music & Dance Academy</div>
+        <p>Nurturing the classical arts of Carnatic music and Bharatanatyam in Arani, Tamil Nadu. Preserving tradition, one student at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Courses</h4>
+        <a href="#courses">Carnatic Vocals</a>
+        <a href="#courses">Bharatanatyam</a>
+        <a href="#courses">Veena</a>
+        <a href="#courses">Keyboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#about">About Us</a>
+        <a href="#schedule">Schedule & Fees</a>
+        <a href="#faculty">Faculty</a>
+        <a href="#contact">Enroll Now</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Swaralaya Music & Dance Academy, Arani · Tiruvannamalai District, Tamil Nadu &nbsp;·&nbsp; 📞 95240 24097</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+function submitEnquiry(){
+  document.getElementById('form-msg').style.display='block';
+  setTimeout(()=>{document.getElementById('form-msg').style.display='none';},5000);
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
 </body>
 </html>
